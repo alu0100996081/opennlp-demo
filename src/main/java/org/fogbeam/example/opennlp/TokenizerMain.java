@@ -118,6 +118,8 @@ public class TokenizerMain
 	            // asegurarnos que se cierra el fichero.
 	            if (null != fichero)
 	               fichero.close();
+	            if (null != pw)
+		               pw.close();
             } catch (Exception e3) {
                e3.printStackTrace();
             }
