@@ -37,26 +37,47 @@ public class TokenizerMain
 			TokenizerModel model = new TokenizerModel( modelIn );
 		
 			Tokenizer tokenizer = new TokenizerME(model);
-			
-			archivo = new File ("models/entrada.txt");
-			fr = new FileReader (archivo);
+			/**
+			 * Ruta y nombre del fichero de entrada
+			 */	
+			archivo = new File ("models/entrada.txt");//ruta y nombre del fichero de entrada
+			/**
+			 * Abrimos el archivo en modo lectura
+			 */	
+			fr = new FileReader (archivo); //abrimos el archivo en modo lectura
 			br = new BufferedReader(fr);
-				
+			/**
+			 * Ruta y nombre del fichero de salida
+			 */	
+			fichero = new FileWriter("models/salida.txt");//ruta y nombre del fichero de salida
+			/**
+			 * Abrimos el fichero en modo escritura
+			 */	
+            pw = new PrintWriter(fichero);//abrimos el fichero en modo escritura
+			
 			String linea;
 			String[] tokens = null;
+			/**
+			 * Vamos leyendo el archivo hasta el final
+			 */	
+	        while((linea=br.readLine())!=null) {// vamos leyendo el archivo hasta el final
+	        	/**
+				 * Tokenizamos linea a linea el archivo
+				 */	
+	        	 tokens = tokenizer.tokenize(linea);//tokenizamos linea a linea el archivo
+	        	 /**
+				 * Recorremos el vector de string tokenizado
+				 */	
+	        	 for( String token : tokens )
+	 			{
+	        		 /**
+	 				 * Escribe el token en el fichero
+	 				 */	
+	 				pw.println(token);// escribe el token en el fichero
+	 				System.out.println( token );
+	 			}
+	        } 	 
 			
-	        while((linea=br.readLine())!=null)
-	        	 tokens = tokenizer.tokenize(linea);
-	    
-	        fichero = new FileWriter("models/salida.txt");
-            pw = new PrintWriter(fichero);
-
-	        
-			for( String token : tokens )
-			{
-				pw.println(token);
-				System.out.println( token );
-			}
 			
 		}
 		catch( IOException e )
